@@ -6,9 +6,7 @@ const createNew = async (req, res, next) => {
       .status(StatusCodes.CREATED)
       .json({ message: 'POST from controller: API create new board ' })
   } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      errors: error.message
-    })
+    next(error)
   }
 }
 
