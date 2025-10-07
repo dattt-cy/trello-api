@@ -6,14 +6,25 @@ const createNew = async (req, res, next) => {
     // Dieu huong du lieu sang tang service
     const createdBoard = await boardService.createNew(req.body)
     // Co ket qua tra ve phia client
-    res
-      .status(StatusCodes.CREATED)
-      .json(createdBoard)
+    res.status(StatusCodes.CREATED).json(createdBoard)
+  } catch (error) {
+    next(error)
+  }
+}
+
+const getDetails = async (req, res, next) => {
+  try {
+    // Dieu huong du lieu sang tang service
+    const boardId = req.params.id
+    const board = await boardService.getDetails(boardId)
+
+    res.status(StatusCodes.OK).json(board)
   } catch (error) {
     next(error)
   }
 }
 
 export const boardController = {
-  createNew
+  createNew,
+  getDetails
 }
